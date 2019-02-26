@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyPetUser index{% endblock %}
+
+{% block content %}
+    <h1>MyPetUser index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for my_pet_user in my_pet_users %}
+            <tr>
+                <td>{{ my_pet_user.id }}</td>
+                <td>{{ my_pet_user.status }}</td>
+                <td>{{ my_pet_user.nom }}</td>
+                <td>{{ my_pet_user.prenom }}</td>
+                <td>{{ my_pet_user.email }}</td>
+                <td>
+                    <a href="{{ path('my_pet_user_show', {'id': my_pet_user.id}) }}">show</a>
+                    <a href="{{ path('my_pet_user_edit', {'id': my_pet_user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('my_pet_user_new') }}">Create new</a>
+{% endblock %}

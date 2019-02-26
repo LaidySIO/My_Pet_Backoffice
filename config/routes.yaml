@@ -1,0 +1,3 @@
+index:
+    path: /
+    controller: FOS\UserBundle\Controller\SecurityController::loginAction

@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MyPetUser{% endblock %}
+
+{% block content %}
+    <h1>MyPetUser</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ my_pet_user.id }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ my_pet_user.status }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ my_pet_user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ my_pet_user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ my_pet_user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('my_pet_user_index') }}">back to list</a>
+
+    <a href="{{ path('my_pet_user_edit', {'id': my_pet_user.id}) }}">edit</a>
+
+    {{ include('my_pet_user/_delete_form.html.twig') }}
+{% endblock %}
