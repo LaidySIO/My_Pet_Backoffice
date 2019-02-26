@@ -23,6 +23,8 @@ class MyPetUserController extends AbstractController
 {
     /**
      * @Route("/", name="my_pet_user_index", methods={"GET"})
+     * @param MyPetUserRepository $myPetUserRepository
+     * @return Response
      */
     public function index(MyPetUserRepository $myPetUserRepository): Response
     {
@@ -34,6 +36,9 @@ class MyPetUserController extends AbstractController
 
     /**
      * @Route("/new", name="my_pet_user_new", methods={"GET","POST"})
+     * @param Request $request
+     * @param MyPetUserRepository $myPetUserRepository
+     * @return Response
      */
     public function new(Request $request, MyPetUserRepository $myPetUserRepository): Response
     {
@@ -43,7 +48,11 @@ class MyPetUserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $myPetUserRepository->add($myPetUser);
+            $myPetUser = $myPetUserRepository->add($myPetUser);
+
+            return $this->render('my_pet_user/show.html.twig', [
+                'my_pet_user' => $myPetUser,
+            ]);
 
         }
 
@@ -56,6 +65,8 @@ class MyPetUserController extends AbstractController
     /**
      * @Route("/{id}", name="my_pet_user_show", methods={"GET"})
      * @Entity("myPetUser", expr="repository.findOne(id)")
+     * @param MyPetUser $myPetUser
+     * @return Response
      */
     public function show(MyPetUser $myPetUser): Response
     {
@@ -67,14 +78,20 @@ class MyPetUserController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="my_pet_user_edit", methods={"GET","POST"})
+     * @Entity("myPetUser", expr="repository.findOne(id)")
+     * @param Request $request
+     * @param MyPetUser $myPetUser
+     * @param MyPetUserRepository $myPetUserRepository
+     * @return Response
      */
-    public function edit(Request $request, MyPetUser $myPetUser): Response
+    public function edit(Request $request, MyPetUser $myPetUser, MyPetUserRepository $myPetUserRepository): Response
     {
         $form = $this->createForm(MyPetUserType::class, $myPetUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+
+            $myPetUserRepository->update($myPetUser);
 
             return $this->redirectToRoute('my_pet_user_index', [
                 'id' => $myPetUser->getId(),
@@ -89,15 +106,26 @@ class MyPetUserController extends AbstractController
 
     /**
      * @Route("/{id}", name="my_pet_user_delete", methods={"DELETE"})
+     * @Entity("myPetUser", expr="repository.delete(id)")
+     * @param Request $request
+     * @param String $MyPetUserId
+     * @param MyPetUserRepository $myPetUserRepository
+     * @return Response
      */
-    public function delete(Request $request, MyPetUser $myPetUser): Response
+    public function delete(Request $request, String $MyPetUserId, MyPetUserRepository $myPetUserRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $myPetUser->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($myPetUser);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('delete' . $MyPetUserId, $request->request->get('_token'))) {
+
+            $MyPetUserId = $myPetUserRepository->delete($MyPetUserId);
+
+            return $this->redirectToRoute('my_pet_user_index', [
+                'id' => $MyPetUserId,
+            ]);
+
         }
 
-        return $this->redirectToRoute('my_pet_user_index');
+        return $this->redirectToRoute('my_pet_user_delete', [
+            'id' => $MyPetUserId,
+        ]);
     }
 }

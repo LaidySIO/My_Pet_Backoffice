@@ -74,34 +74,30 @@ class MyPetUserRepository extends ServiceEntityRepository
         json_encode($newFirebaseUser);
         $firebase->set(DEFAULT_PATH . "/$token/" , $newFirebaseUser);
 
+        return $myPetUser;
+
     }
 
-    // /**
-    //  * @return MyPetUser[] Returns an array of MyPetUser objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function update(MyPetUser $myPetUser) {
+        $firebase = Firebase::getInstance(DEFAULT_URL, DEFAULT_TOKEN);
+        $newFirebaseUser = [
+            'email' => $myPetUser->getEmail(),
+            'status' => $myPetUser->getStatus(),
+            'nom' => $myPetUser->getNom(),
+            'prenom' => $myPetUser->getPrenom()
+        ];
+        json_encode($newFirebaseUser);
+        $firebase->update(DEFAULT_PATH . "/" . $myPetUser->getId() . "/" , $newFirebaseUser);
 
-    /*
-    public function findOneBySomeField($value): ?MyPetUser
-    {
-        return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
     }
-    */
+
+    public function delete(String $id) {
+        $firebase = Firebase::getInstance(DEFAULT_URL, DEFAULT_TOKEN);
+
+        $firebase->delete(DEFAULT_PATH . "/$id/");
+
+        return $id;
+
+    }
+
 }
