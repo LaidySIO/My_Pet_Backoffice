@@ -3,7 +3,7 @@
 {% block title %}Edit MyPetUser{% endblock %}
 
 {% block content %}
-    <h1>Edit MyPetUser</h1>
+    <h1>Edition : {{ my_pet_user.prenom }} {{ my_pet_user.nom }}</h1>
 
     {{ include('my_pet_user/_form.html.twig', {'button_label': 'Update'}) }}
 
