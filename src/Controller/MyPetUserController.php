@@ -2,9 +2,15 @@
 
 namespace App\Controller;
 
-const DEFAULT_URL = 'https://pimpofpet.firebaseio.com/';
-const DEFAULT_TOKEN = 'FAGswNvJdDthRMHLSjhD84t8EcWjJhKiqZk9kQNN';
-const DEFAULT_PATH = '/user';
+// BDD de test
+// const DEFAULT_URL = 'https://pimpofpet.firebaseio.com/';
+// const DEFAULT_TOKEN = 'FAGswNvJdDthRMHLSjhD84t8EcWjJhKiqZk9kQNN';
+// const DEFAULT_PATH = '/User';
+
+// BDD Firebase En lien avec l'appli mobile
+const DEFAULT_URL = 'https://mypetphase2.firebaseio.com/';
+const DEFAULT_TOKEN = '57RCM6y5VLc4SCNG3QsXvebuMikYG7xbWtNdRmlZ';
+const DEFAULT_PATH = '/Users';
 
 use App\Entity\MyPetUser;
 use App\Form\MyPetUserType;
