@@ -3,11 +3,13 @@
 {% block title %}Edit MyPetUser{% endblock %}
 
 {% block content %}
-    <h1>Edition : {{ my_pet_user.prenom }} {{ my_pet_user.nom }}</h1>
+    <h1>Edition : {{ my_pet_user.firstName }} {{ my_pet_user.lastName }} </h1>
 
-    {{ include('my_pet_user/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('my_pet_user/_form.html.twig', {'button_label': 'Update'}) }}
+
+        {{ include('my_pet_user/_delete_form.html.twig') }}
 
     <a href="{{ path('my_pet_user_index') }}">back to list</a>
 
-    {{ include('my_pet_user/_delete_form.html.twig') }}
+
 {% endblock %}

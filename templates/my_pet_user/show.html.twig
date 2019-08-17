@@ -3,7 +3,7 @@
 {% block title %}MyPetUser{% endblock %}
 
 {% block content %}
-    <h1>{{ my_pet_user.prenom }} {{ my_pet_user.nom }}</h1>
+    <h1>{{ my_pet_user.firstName }} {{ my_pet_user.lastName }}</h1>
 
     <table class="table">
         <tbody>
@@ -17,11 +17,11 @@
             </tr>
             <tr>
                 <th>Nom</th>
-                <td>{{ my_pet_user.nom }}</td>
+                <td>{{ my_pet_user.lastName }}</td>
             </tr>
             <tr>
                 <th>Prenom</th>
-                <td>{{ my_pet_user.prenom }}</td>
+                <td>{{ my_pet_user.firstName }}</td>
             </tr>
             <tr>
                 <th>Email</th>

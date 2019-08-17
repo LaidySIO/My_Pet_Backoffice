@@ -1,0 +1,16 @@
+.mypet-blue {
+    background-color: #01bcd4 !important;
+    color: #FFFFFF !important;
+}
+
+nav.mb-3 {
+    background-color: #01bcd4 !important;
+}
+
+input[value=Connexion] {
+    background-color: #01bcd4 !important;
+}
+
+div.dropdown-menu {
+    background-color: #FFFFFF;
+}

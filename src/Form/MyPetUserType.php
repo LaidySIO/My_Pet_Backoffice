@@ -20,9 +20,11 @@ class MyPetUserType extends AbstractType
                     'Owner' => Status::OWNER,
                     'Petsitter' => Status::PETSITTER]
                 ])
-            ->add('nom')
-            ->add('prenom')
+            ->add('lastName')
+            ->add('firstName')
             ->add('email')
+            ->add('age')
+            ->add('description')
         ;
     }
 

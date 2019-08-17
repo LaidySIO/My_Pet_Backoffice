@@ -4,7 +4,7 @@ namespace App\Repository;
 
 const DEFAULT_URL = 'https://pimpofpet.firebaseio.com/';
 const DEFAULT_TOKEN = 'FAGswNvJdDthRMHLSjhD84t8EcWjJhKiqZk9kQNN';
-const DEFAULT_PATH = '/user';
+const DEFAULT_PATH = '/Users';
 
 use App\Entity\Firebase;
 use App\Entity\MyPetUser;
@@ -38,8 +38,8 @@ class MyPetUserRepository extends ServiceEntityRepository
             $user->setId($id);
             $user->setEmail($jsonuUser['email']);
             $user->setStatus($jsonuUser['status']);
-            $user->setNom($jsonuUser['nom']);
-            $user->setPrenom($jsonuUser['prenom']);
+            $user->setLastName($jsonuUser['firstname']);
+            $user->setFirstName($jsonuUser['lastname']);
 
             $users[] = $user;
         }
@@ -55,8 +55,8 @@ class MyPetUserRepository extends ServiceEntityRepository
         $user->setId($id);
         $user->setEmail($jsonUser['email']);
         $user->setStatus($jsonUser['status']);
-        $user->setNom($jsonUser['nom']);
-        $user->setPrenom($jsonUser['prenom']);
+        $user->setLastName($jsonUser['firstname']);
+        $user->setFirstName($jsonUser['lastname']);
 
         return $user;
     }
@@ -68,8 +68,8 @@ class MyPetUserRepository extends ServiceEntityRepository
         $newFirebaseUser = [
             'email' => $myPetUser->getEmail(),
             'status' => $myPetUser->getStatus(),
-            'nom' => $myPetUser->getNom(),
-            'prenom' => $myPetUser->getPrenom()
+            'firstname' => $myPetUser->getLastName(),
+            'lastname' => $myPetUser->getFirstName()
         ];
         json_encode($newFirebaseUser);
         $firebase->set(DEFAULT_PATH . "/$token/" , $newFirebaseUser);
@@ -83,8 +83,8 @@ class MyPetUserRepository extends ServiceEntityRepository
         $newFirebaseUser = [
             'email' => $myPetUser->getEmail(),
             'status' => $myPetUser->getStatus(),
-            'nom' => $myPetUser->getNom(),
-            'prenom' => $myPetUser->getPrenom()
+            'firstname' => $myPetUser->getLastName(),
+            'lastname' => $myPetUser->getFirstName()
         ];
         json_encode($newFirebaseUser);
         $firebase->update(DEFAULT_PATH . "/" . $myPetUser->getId() . "/" , $newFirebaseUser);
