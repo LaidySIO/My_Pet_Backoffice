@@ -49,6 +49,8 @@ class MyPetUserController extends AbstractController
     public function new(Request $request, MyPetUserRepository $myPetUserRepository): Response
     {
         $myPetUser = new MyPetUser();
+        $myPetUser->setStatus("offline");
+        $myPetUser->setImageURL("https://firebasestorage.googleapis.com/v0/b/gpe-etna-54cc9.appspot.com/o/uploads%2F1554508526637.png?alt=media&token=9678d503-480a-438e-bec7-afade8c77dda");
         $form = $this->createForm(MyPetUserType::class, $myPetUser);
         $form->handleRequest($request);
 

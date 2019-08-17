@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\MyPetUser;
 use App\Help\Status;
+use App\Help\UserMode;
 use SplEnum;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -15,16 +16,18 @@ class MyPetUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status', ChoiceType::class, [
+            ->add('isPetsitter', ChoiceType::class, [
                 'choices' => [
-                    'Owner' => Status::OWNER,
-                    'Petsitter' => Status::PETSITTER]
+                    'Owner' => UserMode::OWNER,
+                    'Petsitter' => UserMode::PETSITTER]
                 ])
             ->add('lastName')
             ->add('firstName')
             ->add('email')
             ->add('age')
             ->add('description')
+            ->add('status')
+            ->add('imageURL')
         ;
     }
 

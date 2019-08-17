@@ -52,6 +52,16 @@ class MyPetUser
     private $description;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $isPetsitter;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imageURL;
+
+    /**
      * MyPetUser constructor.
      */
     public function __construct()
@@ -165,6 +175,39 @@ class MyPetUser
     {
         $this->username = $username;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getIsPetsitter()
+    {
+        return $this->isPetsitter;
+    }
+
+    /**
+     * @param mixed $isPetsitter
+     */
+    public function setIsPetsitter($isPetsitter): void
+    {
+        $this->isPetsitter = $isPetsitter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageURL()
+    {
+        return $this->imageURL;
+    }
+
+    /**
+     * @param mixed $imageURL
+     */
+    public function setImageURL($imageURL): void
+    {
+        $this->imageURL = $imageURL;
+    }
+
 
 
 }

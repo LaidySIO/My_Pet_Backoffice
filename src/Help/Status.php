@@ -12,7 +12,7 @@ use SplEnum;
 
 abstract class Status {
 
-    const PETSITTER = "Petsitter";
-    const OWNER = "Owner";
+    const ONLINE = "online";
+    const OFFLINE = "offline";
 
 }

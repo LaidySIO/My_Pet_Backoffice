@@ -40,6 +40,10 @@ class MyPetUserRepository extends ServiceEntityRepository
             $user->setStatus($jsonuUser['status']);
             $user->setLastName($jsonuUser['firstname']);
             $user->setFirstName($jsonuUser['lastname']);
+            $user->setAge($jsonuUser['age']);
+            $user->setIsPetsitter($jsonuUser['isPetSitter']);
+            $user->setDescription($jsonuUser['description']);
+            $user->setImageURL($jsonuUser['imageURL']);
 
             $users[] = $user;
         }
@@ -57,6 +61,10 @@ class MyPetUserRepository extends ServiceEntityRepository
         $user->setStatus($jsonUser['status']);
         $user->setLastName($jsonUser['firstname']);
         $user->setFirstName($jsonUser['lastname']);
+        $user->setAge($jsonUser['age']);
+        $user->setIsPetsitter($jsonUser['isPetSitter']);
+        $user->setDescription($jsonUser['description']);
+        $user->setImageURL($jsonUser['imageURL']);
 
         return $user;
     }
@@ -66,10 +74,16 @@ class MyPetUserRepository extends ServiceEntityRepository
         $token = TokenGen::generateToken();
         $myPetUser->setId($token);
         $newFirebaseUser = [
+            'id' => $myPetUser->getId(),
             'email' => $myPetUser->getEmail(),
             'status' => $myPetUser->getStatus(),
             'firstname' => $myPetUser->getLastName(),
-            'lastname' => $myPetUser->getFirstName()
+            'lastname' => $myPetUser->getFirstName(),
+            'age' => $myPetUser->getAge(),
+            'isPetSitter' => $myPetUser->getIsPetsitter(),
+            'description' => $myPetUser->getDescription(),
+            'imageURL' => $myPetUser->getImageURL()
+
         ];
         json_encode($newFirebaseUser);
         $firebase->set(DEFAULT_PATH . "/$token/" , $newFirebaseUser);
@@ -84,7 +98,11 @@ class MyPetUserRepository extends ServiceEntityRepository
             'email' => $myPetUser->getEmail(),
             'status' => $myPetUser->getStatus(),
             'firstname' => $myPetUser->getLastName(),
-            'lastname' => $myPetUser->getFirstName()
+            'lastname' => $myPetUser->getFirstName(),
+            'age' => $myPetUser->getAge(),
+            'isPetSitter' => $myPetUser->getIsPetsitter(),
+            'description' => $myPetUser->getDescription(),
+            'imageURL' => $myPetUser->getImageURL()
         ];
         json_encode($newFirebaseUser);
         $firebase->update(DEFAULT_PATH . "/" . $myPetUser->getId() . "/" , $newFirebaseUser);
